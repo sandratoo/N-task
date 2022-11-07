@@ -10,9 +10,12 @@ csvOutputPath = 'Output.csv'
 def main():
 
     make_json(csvFilePath='HNGi9 CSV FILE - Sheet1.csv')
-    write_csv(csvFilePath, hash)
 
-    data = {}
+    hashed_str = encode(jsonFilePath)
+
+    write_csv(csvFilePath, hashed_str)
+    print(hashed_str)
+
     # Get total rows
     count = 0
     with open(csvFilePath) as csvf:
@@ -52,14 +55,13 @@ def encode(json_file):
     json_file = 'JSON'
 
     result = hashlib.sha256(json_file.encode())
-    hash = result.hexdigest()
-    return hash
+    hashed_code = result.hexdigest()
+    return hashed_code
+    
 
 # Append to each line of csv(as a filename.output.csv
 
-def write_csv(csvFilePath, hash):
-
-    hash = 'hash result'
+def write_csv(csvFilePath, hashed_str):
 
     with open(csvFilePath, 'r') as read_file,\
         open('Output.csv', 'w',newline='') as write_file:
@@ -68,7 +70,7 @@ def write_csv(csvFilePath, hash):
             csv_writer = csv.writer(write_file)
 
             for row in csv_reader:
-                row.append(hash)
+                row.append(hashed_str)
 
                 csv_writer.writerow(row)
 
