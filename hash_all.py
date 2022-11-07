@@ -10,6 +10,7 @@ csvOutputPath = 'Output.csv'
 def main():
 
     make_json(csvFilePath='HNGi9 CSV FILE - Sheet1.csv')
+    write_csv(csvFilePath, hash)
 
     data = {}
     # Get total rows
@@ -51,15 +52,16 @@ def encode(json_file):
     json_file = 'JSON'
 
     result = hashlib.sha256(json_file.encode())
-    return(result.hexdigest())
+    hash = result.hexdigest()
+    return hash
 
 # Append to each line of csv(as a filename.output.csv
 
-def write_csv():
+def write_csv(csvFilePath, hash):
 
     hash = 'hash result'
 
-    with open('HNGi9 CSV FILE - Sheet1.csv', 'r') as read_file,\
+    with open(csvFilePath, 'r') as read_file,\
         open('Output.csv', 'w',newline='') as write_file:
         
             csv_reader = csv.reader(read_file)
