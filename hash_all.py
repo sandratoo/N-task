@@ -51,7 +51,6 @@ def make_json(csvFilePath):
 
 def encode(json_file):
 
-    
     json_file = 'JSON'
 
     result = hashlib.sha256(json_file.encode())
